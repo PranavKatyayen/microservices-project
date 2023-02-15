@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/kafka/employeeLeave")
-public class KafkaController {
+public class KafkaMessageController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(KafkaController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(KafkaMessageController.class);
 
     @Autowired
     private LeaveProducer leaveProducer;
@@ -27,6 +27,6 @@ public class KafkaController {
     public void publish(@PathVariable String empId) {
         Leave leave = workHourService.getEmployeeLeaveDetails(empId);
         leaveProducer.sendMessage(leave);
-        LOG.info("Leave details published");
+        LOG.info("Leave details has been published to workhour-service topic");
     }
 }

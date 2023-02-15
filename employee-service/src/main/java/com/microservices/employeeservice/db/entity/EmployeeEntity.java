@@ -34,6 +34,7 @@ public class EmployeeEntity {
         this.baseSalary = builder.baseSalary;
     }
 
+    // Getters
     public String getId() {
         return id;
     }

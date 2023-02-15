@@ -22,11 +22,11 @@ public class WorkHourController {
 
     @PostMapping
     public Leave getEmployeeLeaveDetail(@RequestBody EmployeeDetails emp) {
-        return workHourService.getEmployeeLeaveDetails(String.valueOf(emp));
+        return workHourService.getEmployeeLeaveDetails(emp);
     }
 
     @GetMapping("/{empId}")
-    @CircuitBreaker(name = "employee-leave-details", fallbackMethod = "getEmployeeLeaveDetailsFallbackResponse")
+
     public Leave getEmployeeLeaveDetails(@PathVariable String empId) {
         return workHourService.getEmployeeLeaveDetails(empId);
     }
@@ -34,8 +34,8 @@ public class WorkHourController {
     private Leave getEmployeeLeaveDetailsFallbackResponse(Exception e) {
         return new Leave
                 .LeaveBuilder()
-                .setCount(0)
-                .setDaysInMonth(0)
+                .setCount(00)
+                .setDaysInMonth(00)
                 .build();
     }
 }

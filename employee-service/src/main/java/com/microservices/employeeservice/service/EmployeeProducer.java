@@ -25,7 +25,8 @@ public class EmployeeProducer {
     }
 
     public void sendMessage(EmployeeEntity emp) {
-        LOG.info("==> " + emp.toString());
+        LOG.info("===> " + emp.toString());
+
 
         Message<EmployeeEntity> message = MessageBuilder
                 .withPayload(emp)

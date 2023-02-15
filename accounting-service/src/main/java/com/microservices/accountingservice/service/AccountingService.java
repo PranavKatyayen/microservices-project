@@ -21,13 +21,9 @@ public class AccountingService {
     @Autowired
     WorkhourServiceProxy workhourServiceProxy;
 
-
     public Salary calcSalary(EmployeeSalary emp) {
         Optional<Employee> employee = employeeServiceProxy.getEmployeeById(emp.getEmpId());
         Leave empLeave = workhourServiceProxy.getEmployeeLeaveDetail(emp);
-        log.info("YearMonth :: " + emp.getYearMonth());
-        log.info(employee.toString());
-        log.info(empLeave.toString());
 
         int baseSalary = employee.orElseThrow().getBaseSalary();
         int employeeLeaveCount = empLeave.getCount();

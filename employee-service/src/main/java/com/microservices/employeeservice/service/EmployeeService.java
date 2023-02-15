@@ -16,7 +16,6 @@ public class EmployeeService {
 
     @Autowired
     EmployeeProducer employeeProducer;
-
     public String saveEmployee(EmployeeEntity employee) {
         repo.save(employee);
         return "Employee id '" + employee.getId() + "' has been saved successfully";
@@ -35,4 +34,3 @@ public class EmployeeService {
         repo.deleteById(id);
     }
 }
-

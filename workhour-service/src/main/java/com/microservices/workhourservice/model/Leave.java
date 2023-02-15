@@ -23,8 +23,16 @@ public class Leave {
         return count;
     }
 
-    public int getYearMonth() {
+    public int getDaysInMonth() {
         return daysInMonth;
+    }
+
+    @Override
+    public String toString() {
+        return "Leave{" +
+                "count=" + count +
+                ", daysInMonth=" + daysInMonth +
+                '}';
     }
 
     @JsonPOJOBuilder(withPrefix = "set")

@@ -27,6 +27,7 @@ public class EmployeeController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
+
     public List<EmployeeEntity> retrieveAllEmployees() {
         return employeeService.retrieveAllEmployees();
     }
@@ -37,22 +38,45 @@ public class EmployeeController {
         return employeeService.getEmployeeById(id);
     }
 
+    @PutMapping("/updateEmployee/{empId}")
+    public String updateEmployee(
+            @PathVariable("empId") String id,
+            @RequestBody EmployeeEntity employee
+    ) {
+        Optional<EmployeeEntity> emp = employeeService.getEmployeeById(id);
+        if (emp.isPresent())
+            return employeeService.saveEmployee(employee);
+        return "Employee id '" + id + "' couldn't be updated.";
+    }
+
     @DeleteMapping("/removeEmployee/{empId}")
     public void removeEmployee(@PathVariable("empId") String id) {
         employeeService.removeEmployee(id);
     }
 
+    private List<Employee> retrieveAllEmployeesFallbackResponse(Exception e) {
+        Employee emp = new Employee
+                .EmployeeBuilder()
+                .setId("000")
+                .setName("xxx")
+                .setDeptName("xxx")
+                .setAddress("xxx")
+                .setJoiningDate(LocalDate.of(2022, 10, 10))
+                .setBaseSalary(2000)
+                .build();
 
-    private Optional<Employee> getEmpByIdFallbackResponse(Exception e) {
+        return List.of(emp);
+    }
+
+    private Optional<Employee> getEmployeeByIdFallbackResponse(Exception e) {
         return Optional.ofNullable(new Employee
                 .EmployeeBuilder()
-                .setId("ABC")
-                .setName("Default")
-                .setDeptName("HR")
-                .setAddress("XXXXXXXXXXXXX")
-                .setJoiningDate(LocalDate.of(2022, 9, 19))
-                .setBaseSalary(30000)
+                .setId("000")
+                .setName("xxx")
+                .setDeptName("xxx")
+                .setAddress("xxx")
+                .setJoiningDate(LocalDate.of(2022, 10, 10))
+                .setBaseSalary(2000)
                 .build());
-
     }
 }

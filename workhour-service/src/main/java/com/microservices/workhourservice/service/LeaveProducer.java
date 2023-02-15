@@ -25,8 +25,9 @@ public class LeaveProducer {
     }
 
     public void sendMessage(Leave leave) {
-        LOG.info("==> " + leave.toString());
+        LOG.info("===> " + leave.toString());
 
+        // create Message
         Message<Leave> message = MessageBuilder
                 .withPayload(leave)
                 .setHeader(KafkaHeaders.TOPIC, topic.name())

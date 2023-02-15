@@ -15,9 +15,9 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/kafka/employees")
-public class KafkaController {
+public class KafkaMessageController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(KafkaController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(KafkaMessageController.class);
 
     @Autowired
     private EmployeeProducer employeeProducer;
@@ -29,6 +29,6 @@ public class KafkaController {
     public void publish(@PathVariable String empId) {
         Optional<EmployeeEntity> emp = employeeService.getEmployeeById(empId);
         employeeProducer.sendMessage(emp.orElseThrow());
-        LOG.info("Employee id '" + empId + "' has been published ");
+        LOG.info("Employee id '" + empId + "' has been published to employee-service topic");
     }
 }
